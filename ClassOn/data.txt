@@ -1,0 +1,5 @@
+data00 data01 data02 data03 60.0
+data10 data11 data12 data13 60.0
+data20 data21 data22 data23 60.0
+data30 data31 data32 data33 60.0
+1 wy nan Chinese 60.0
