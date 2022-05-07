@@ -86,16 +86,7 @@ public class Driver {
 
     public static void Mainmenu()
     {
-        /*5. 键盘输入数据
 
-6.成绩查询
-7.输出到 excel 文件
-8.输出到纯文本文件
-9.输出到 xml 文件
-10.输出到 json 文件
-11.修改密码
-12.退出
-         */
         System.out.println("****************************************************************************************************");
         System.out.print(String.format("%-25s","1.从excel中加载数据"));
         System.out.print(String.format("%-25s","2.从文本文件中加载数据"));
