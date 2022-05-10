@@ -3,6 +3,7 @@ package week11;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Scanner;
 
 public class Driver_JDBC {
@@ -13,7 +14,8 @@ public class Driver_JDBC {
 
     public static void main(String args[])
     {
-        String id=null;
+        String id="1";
+        String sql="select * from tstudent where id=? ";
         /*测试专用
         //Add_to_Database();
        // Update_to_Database();
@@ -23,6 +25,12 @@ public class Driver_JDBC {
        // Select_From_Database();
         //Select_From_Database_By_id();
          */
+        List<Student> stu = JDBC_class.Select_All(sql,Student.class,id);
+
+        for (Student temp:stu) {
+            System.out.println(temp);
+        }
+        /*
         Scanner sc = new Scanner(System.in);
         int choice=0;
         MainMenu();
@@ -38,7 +46,7 @@ public class Driver_JDBC {
             MainMenu();
             choice=sc.nextInt();
         }
-
+        */
     }
 
     public static void MainMenu()
@@ -71,16 +79,7 @@ public class Driver_JDBC {
         System.out.println("请输入成绩");
         score= sc.nextDouble();
 
-/*
-        //判断学号重复
-        boolean flag=Select_From_Database_By_id_If(id);
-        if(flag==true)
-        {
-            name=global_name;
-            gender=global_gender;
-            time=global_birth;
-        }
-*/
+
         Connection con=null;
        // Statement sta=null;
         PreparedStatement pstm=null;
@@ -124,6 +123,7 @@ public class Driver_JDBC {
         }
     }
 
+
     public static void Delete_From_Database()
     {
         Scanner sc = new Scanner(System.in);
@@ -164,6 +164,7 @@ public class Driver_JDBC {
         }
     }
 
+
     public static void Update_to_Database()
     {
         Scanner sc = new Scanner(System.in);
@@ -200,6 +201,7 @@ public class Driver_JDBC {
 
     }
 
+
     public static void Select_From_Database() {
         Connection con = null;
         Statement sta = null;
@@ -226,6 +228,7 @@ public class Driver_JDBC {
         }
 
     }
+
     public static void Select_From_Database_By_id() {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -262,37 +265,6 @@ public class Driver_JDBC {
             JDBC_class.Release(con, pstm, res);
         }
     }
-    public static boolean Select_From_Database_By_id_If(String id) {
-        Connection con = null;
-        PreparedStatement pstm = null;
-        Scanner sc = new Scanner(System.in);
-        ResultSet res=null;
-        boolean flag = false;
-        try {
-            con = JDBC_class.getConnection();
-            //  boolean IfSelect=false;
 
-            String sql_select = "select * from tstudent where id=?";
-            pstm = con.prepareStatement(sql_select);
-            pstm.setString(1, id);
-            flag = pstm.execute();
-            res=pstm.executeQuery();
-
-
-            global_id=res.getString("id");
-            global_name=res.getString("name");
-            global_gender=res.getString("gender");
-            global_birth=res.getString("birth");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //最后一定要释放资源
-        finally {
-            JDBC_class.Release(con, pstm, res);
-            return flag;
-        }
-    }
 
 }
